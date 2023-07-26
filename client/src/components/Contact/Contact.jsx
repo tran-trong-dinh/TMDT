@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./Contact.scss";
 
 import { FaLocationArrow, FaMobileAlt, FaEnvelope } from "react-icons/fa";

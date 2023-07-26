@@ -11,8 +11,8 @@ import Register from "./components/Register/Register";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import AppContext from "./utils/context";
-import Contact from "./components/Footer/Contact/Contact";
-import Map from "./components/Footer/Map";
+import Contact from "./components/Contact/Contact";
+import Map from "./components/Map/Map";
 
 axios.defaults.baseURL = "http://localhost:5000";
 axios.defaults.withCredentials = true;
@@ -76,8 +76,8 @@ function App() {
             element={
               <>
                 <Header />
-                <Map />
                 <Contact />
+                <Map />
                 <Footer />
               </>
             }
