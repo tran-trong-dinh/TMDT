@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import cors from "cors";
+import nodemailer from "nodemailer";
 
 // import uploadCloud from "./config/cloudinary.config.js";
 const app = express();
@@ -32,6 +33,38 @@ app.use("/category", categoryRouter);
 app.use("/product", productRouter);
 app.use("/promotion", promotionRouter);
 app.use("/review", reviewRouter);
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "trantrongdinh0221@gmail.com",
+    pass: process.env.GMAIL_PASSWORD,
+  },
+});
+
+// Route to handle form submission
+app.post("/send-email", (req, res) => {
+  const { fullName, email, subject, message } = req.body;
+
+  // Email content
+  const mailOptions = {
+    from: email, // Replace with your email (email nguồn)
+    to: "trantrongdinh0221@gmail.com", // Replace with the recipient's email
+    subject: subject,
+    text: `Name: ${fullName}\nEmail: ${email}\nMessage: ${message}`,
+  };
+
+  // Send email
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send("Error sending email");
+    } else {
+      console.log("Email sent: " + info.response);
+      res.send("Email sent successfully");
+    }
+  });
+});
 
 app.use(notFound);
 app.use(errorHandler);

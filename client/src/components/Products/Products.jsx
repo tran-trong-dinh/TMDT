@@ -8,7 +8,7 @@ const Products = ({ products }) => {
       {products.length > 0 ? (
         <div className="products-container">
           <div className="products">
-            {products.map((product) => (
+            {products.slice(0, 8).map((product) => (
               <Product
                 key={product.product_id}
                 product={product}
@@ -16,7 +16,7 @@ const Products = ({ products }) => {
               />
             ))}
           </div>
-          {products.length > 4 && <Link className="see-more ">See more</Link>}
+          {products.length > 8 && <Link className="see-more ">See more</Link>}
         </div>
       ) : (
         <div>
